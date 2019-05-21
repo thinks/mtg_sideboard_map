@@ -1,3 +1,10 @@
+"""
+Copyright(C) 2019 Tommy Hinks <tommy.hinks@gmail.com>
+This file is subject to the license terms in the LICENSE file
+found in the top-level directory of this distribution.
+"""
+
+import argparse
 import json
 
 
@@ -36,6 +43,7 @@ def write_matchup_notes(notes, md_file):
 
 
 def write_matchup_lines(play, draw, sign, md_file):
+    # Ugly iteration hack!
     play_cards = list(play.keys())
     play_counts = list(play.values())
     draw_cards = list(draw.keys())
@@ -84,7 +92,6 @@ def write_toc(matchups_json, md_file):
         md_file.write('[' + name + '](#' + name.replace(' ', '-').lower() + ')  \n')
 
 
-
 def generate_markdown(sb_map_json, md_file):
     write_decklist(sb_map_json["decklist"], md_file)
     write_toc(sb_map_json["matchups"], md_file)
@@ -92,15 +99,19 @@ def generate_markdown(sb_map_json, md_file):
         write_matchup(mu_name, mu_json, md_file)
 
 
-def main(sb_map_filename, markdown_filename):
-    with open(sb_map_filename) as sb_map_json_file, \
-            open(markdown_filename, 'w') as md_file:
+def main():
+    parser = argparse.ArgumentParser(description='Generate markdown')
+    parser.add_argument('-sb', '--sbmap', help='Sideboard map JSON file', required=True)
+    parser.add_argument('-md', '--markdown', help='Output markdown file', required=True)
+    args = vars(parser.parse_args())
+
+    with open(args['sbmap']) as sb_map_json_file, \
+            open(args['markdown'], 'w') as md_file:
         sb_map_json = json.load(sb_map_json_file)
         verify_decklist(sb_map_json["decklist"])
         verify_sideboard_map(sb_map_json)
         generate_markdown(sb_map_json, md_file)
-    print("Done!")
 
 
 if __name__ == "__main__":
-    main('../decks/br_reanimator/sideboard_map.json', '../decks/br_reanimator/README.md')
+    main()

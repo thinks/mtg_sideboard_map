@@ -112,18 +112,18 @@
 ## UW Blade
 
 
-| Play (7) | Draw (4) |
+| Play (4) | Draw (7) |
 | --- | --- |
 | + 2 **Thoughtseize** | + 2 **Thoughtseize** |
 | + 1 **Iona, Shield of Emeria** | + 1 **Iona, Shield of Emeria** |
 | + 1 **Archetype of Endurance** | + 1 **Archetype of Endurance** |
-| + 2 **Grave Titan** |  |
-| + 1 **Lake of the Dead** |  |
+|  | + 2 **Grave Titan** |
+|  | + 1 **Lake of the Dead** |
 | --- | --- |
-| - 4 **Chancellor of the Annex** | - 2 **Cabal Therapy** |
-| - 1 **Cabal Therapy** | - 1 **Ashen Rider** |
-| - 1 **Ashen Rider** | - 1 **Tidespout Tyrant** |
-| - 1 **Tidespout Tyrant** |  |
+| - 2 **Cabal Therapy** | - 4 **Chancellor of the Annex** |
+| - 1 **Ashen Rider** | - 1 **Cabal Therapy** |
+| - 1 **Tidespout Tyrant** | - 1 **Ashen Rider** |
+|  | - 1 **Tidespout Tyrant** |
 
 ## Death and Taxes
 
@@ -186,17 +186,17 @@ Error in original
 ## Elves
 **Reverent Silence** and **Wear//Tear** for **Leyline of the Void** hedging. If you see crop rotation or **Karakas** you need **Archetype of Endurance** with this plan.
 
-| Play (7) | Draw (3) |
+| Play (7) | Draw (7) |
 | --- | --- |
 | + 1 **Elesh Norn, Grand Cenobite** | + 1 **Elesh Norn, Grand Cenobite** |
 | + 2 **Thoughtseize** | + 2 **Thoughtseize** |
-| + 3 **Reverent Silence** |  |
-| + 1 **Wear//Tear** |  |
+| + 3 **Reverent Silence** | + 3 **Reverent Silence** |
+| + 1 **Wear//Tear** | + 1 **Wear//Tear** |
 | --- | --- |
-| - 3 **Chancellor of the Annex** | - 2 **Chancellor of the Annex** |
-| - 2 **Cabal Therapy** | - 1 **Tidespout Tyrant** |
-| - 1 **Ashen Rider** |  |
-| - 1 **Tidespout Tyrant** |  |
+| - 3 **Chancellor of the Annex** | - 3 **Chancellor of the Annex** |
+| - 2 **Cabal Therapy** | - 2 **Cabal Therapy** |
+| - 1 **Ashen Rider** | - 1 **Ashen Rider** |
+| - 1 **Tidespout Tyrant** | - 1 **Tidespout Tyrant** |
 
 ## RG Lands
 
