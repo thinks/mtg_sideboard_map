@@ -325,10 +325,14 @@
       "draw": {
         "in": {
           "Elesh Norn, Grand Cenobite": 1,
-          "Thoughtseize": 2
+          "Thoughtseize": 2,
+          "Reverent Silence": 3,
+          "Wear//Tear": 1
         },
         "out": {
-          "Chancellor of the Annex": 2,
+          "Chancellor of the Annex": 3,
+          "Cabal Therapy": 2,
+          "Ashen Rider": 1,
           "Tidespout Tyrant": 1
         }
       }
