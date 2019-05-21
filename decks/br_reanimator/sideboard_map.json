@@ -168,13 +168,10 @@
         "in": {
           "Thoughtseize": 2,
           "Iona, Shield of Emeria": 1,
-          "Archetype of Endurance": 1,
-          "Grave Titan": 2,
-          "Lake of the Dead": 1
+          "Archetype of Endurance": 1
         },
         "out": {
-          "Chancellor of the Annex": 4,
-          "Cabal Therapy": 1,
+          "Cabal Therapy": 2,
           "Ashen Rider": 1,
           "Tidespout Tyrant": 1
         }
@@ -183,10 +180,13 @@
         "in": {
           "Thoughtseize": 2,
           "Iona, Shield of Emeria": 1,
-          "Archetype of Endurance": 1
+          "Archetype of Endurance": 1,
+          "Grave Titan": 2,
+          "Lake of the Dead": 1
         },
         "out": {
-          "Cabal Therapy": 2,
+          "Chancellor of the Annex": 4,
+          "Cabal Therapy": 1,
           "Ashen Rider": 1,
           "Tidespout Tyrant": 1
         }
