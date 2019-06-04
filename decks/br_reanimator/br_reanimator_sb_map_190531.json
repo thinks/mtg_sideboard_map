@@ -1,7 +1,7 @@
 {
   "title": "BR Reanimator",
   "author": "Eric Landon",
-  "date": "May 3, 2019",
+  "date": "May 31, 2019",
   "decklist": {
     "maindeck": {
       "Entomb": 4,
@@ -104,7 +104,7 @@
           "Chancellor of the Annex": 1,
           "Cabal Therapy": 4,
           "Dark Ritual": 3,
-          "Exhume": 1
+          "Ashen Rider": 1
         }
       }
     },
@@ -236,26 +236,14 @@
       }
     },
     "Maverick": {
-      "notes": "Reverent Silence for Leyline of the Void hedging.",
-      "play": {
+      "notes": "No longer hedging for Leyline of the Void in game 2.",
+      "play,draw": {
         "in": {
-          "Reverent Silence": 3,
           "Elesh Norn, Grand Cenobite": 1,
           "Archetype of Endurance": 1,
-          "Thoughtseize": 2
-        },
-        "out": {
-          "Chancellor of the Annex": 4,
-          "Cabal Therapy": 2,
-          "Ashen Rider": 1
-        }
-      },
-      "draw": {
-        "in": {
-          "Reverent Silence": 3,
-          "Elesh Norn, Grand Cenobite": 1,
-          "Archetype of Endurance": 1,
-          "Thoughtseize": 2
+          "Thoughtseize": 2,
+          "Lake of the Dead": 1,
+          "Grave Titan": 2
         },
         "out": {
           "Chancellor of the Annex": 4,
@@ -265,7 +253,7 @@
       }
     },
     "BR Reanimator": {
-      "notes": "Error in original.",
+      "notes": "Mulligan to Chancellor?",
       "play": {
         "in": {
           "Iona, Shield of Emeria": 1,
@@ -321,21 +309,7 @@
     },
     "Elves": {
       "notes": "Reverent Silence and Wear/Tear for Leyline of the Void hedging. If you see crop rotation or Karakas you need Archetype of Endurance with this plan.",
-      "play": {
-        "in": {
-          "Elesh Norn, Grand Cenobite": 1,
-          "Thoughtseize": 2,
-          "Reverent Silence": 3,
-          "Wear/Tear": 1
-        },
-        "out": {
-          "Chancellor of the Annex": 3,
-          "Cabal Therapy": 2,
-          "Ashen Rider": 1,
-          "Tidespout Tyrant": 1
-        }
-      },
-      "draw": {
+      "play,draw": {
         "in": {
           "Elesh Norn, Grand Cenobite": 1,
           "Thoughtseize": 2,
@@ -378,21 +352,7 @@
     },
     "4C Loam": {
       "notes": "",
-      "play": {
-        "in": {
-          "Grave Titan": 2,
-          "Lake of the Dead": 1,
-          "Wear/Tear": 1,
-          "Serenity": 2,
-          "Reverent Silence": 3
-        },
-        "out": {
-          "Chancellor of the Annex": 4,
-          "Cabal Therapy": 4,
-          "Ashen Rider": 1
-        }
-      },
-      "draw": {
+      "play,draw": {
         "in": {
           "Grave Titan": 2,
           "Lake of the Dead": 1,
@@ -409,21 +369,7 @@
     },
     "Dredge": {
       "notes": "If they have hate other than Leyline of the Void game 2 then board discard back in and Reverent Silence out.",
-      "play": {
-        "in": {
-          "Reverent Silence": 3,
-          "Thoughtseize": 2,
-          "Elesh Norn, Grand Cenobite": 1,
-          "Wear/Tear": 1
-        },
-        "out": {
-          "Chancellor of the Annex": 3,
-          "Cabal Therapy": 2,
-          "Ashen Rider": 1,
-          "Tidespout Tyrant": 1
-        }
-      },
-      "draw": {
+      "play,draw": {
         "in": {
           "Reverent Silence": 3,
           "Thoughtseize": 2,
@@ -438,26 +384,30 @@
         }
       }
     },
-    "Show and Tell": {
+    "Show and Tell (Sneak)": {
       "notes": "",
       "play": {
         "in": {
-          "Thoughtseize": 2
+          "Thoughtseize": 2,
+          "Wear/Tear": 1
         },
         "out": {
-          "Cabal Therapy": 2
+          "Cabal Therapy": 2,
+          "Tidespout Tyrant": 1
         }
       },
       "draw": {
         "in": {
           "Thoughtseize": 2,
           "Lake of the Dead": 1,
-          "Wear/Tear": 1
+          "Wear/Tear": 1,
+          "Serenity": 2
         },
         "out": {
-          "Chancellor of the Annex": 2,
+          "Chancellor of the Annex": 3,
           "Cabal Therapy": 1,
-          "Exhume": 1
+          "Exhume": 1,
+          "Tidespout Tyrant": 1
         }
       }
     },
@@ -480,6 +430,48 @@
           "Cabal Therapy": 1
         }
       }
-    }
+    },
+    "Bomberman": {
+      "notes": "",
+      "play,draw": {
+        "in": {
+          "Thoughtseize": 2,
+          "Wear/Tear": 1,
+          "Serenity": 2
+        },
+        "out": {
+          "Cabal Therapy": 2,
+          "Chancellor of the Annex": 2,
+          "Ashen Rider": 1
+        }
+      }
+    },
+    "Humans": {
+      "notes": "",
+      "play": {
+        "in": {
+          "Thoughtseize": 2,
+          "Archetype of Endurance": 1,
+          "Elesh Norn, Grand Cenobite": 1
+        },
+        "out": {
+          "Cabal Therapy": 3,
+          "Ashen Rider": 1
+        }
+      },
+      "draw": {
+        "in": {
+          "Thoughtseize": 2,
+          "Archetype of Endurance": 1,
+          "Elesh Norn, Grand Cenobite": 1,
+          "Lake of the Dead": 1          
+        },
+        "out": {
+          "Chancellor of the Annex": 2,
+          "Cabal Therapy": 2,
+          "Ashen Rider": 1
+        }
+      }
+    }    
   }
 }

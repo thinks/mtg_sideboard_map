@@ -6,35 +6,7 @@ found in the top-level directory of this distribution.
 
 import argparse
 import json
-
-
-def verify_decklist(decklist_json):
-    assert sum(decklist_json["maindeck"].values()) == 60
-    assert sum(decklist_json["sideboard"].values()) == 15
-
-
-def verify_in_out_with_decklist(decklist_json, in_out_json):
-    maindeck_json = decklist_json["maindeck"]
-    sideboard_json = decklist_json["sideboard"]
-    for key, value in in_out_json["in"].items():
-        assert key in sideboard_json
-        assert sideboard_json[key] >= value
-    for key, value in in_out_json["out"].items():
-        assert key in maindeck_json
-        assert maindeck_json[key] >= value
-
-
-def verify_in_out_zero_sum(in_out_json):
-    assert sum(in_out_json["in"].values()) == sum(in_out_json["out"].values())
-
-
-def verify_sideboard_map(sb_map_json):
-    decklist_json = sb_map_json["decklist"]
-    for value in sb_map_json["matchups"].values():
-        verify_in_out_with_decklist(decklist_json, value["play"])
-        verify_in_out_with_decklist(decklist_json, value["draw"])
-        verify_in_out_zero_sum(value["play"])
-        verify_in_out_zero_sum(value["draw"])
+from verify import verify_decklist, verify_sideboard_map
 
 
 def write_matchup_notes(notes, md_file):
