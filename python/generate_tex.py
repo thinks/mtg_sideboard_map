@@ -6,6 +6,7 @@ found in the top-level directory of this distribution.
 
 import argparse
 import json
+import subprocess
 from verify import verify_decklist, verify_matchups
 
 
@@ -66,6 +67,19 @@ def _write_tex_decklist_section(decklist_json, sb_bg_color, tex_file):
     tex_file.write('\\end{center}\n')
 
 
+def _write_tex_matchup_lines_pd(play_draw_json, screen_names_json, sign_str, bg_color, tex_file):
+    # Ugly iteration hack!
+    play_draw_cards = list(play_draw_json.keys())
+    play_draw_counts = list(play_draw_json.values())
+    for i in range(len(play_draw_json)):
+        card_name = play_draw_cards[i]
+        if card_name in screen_names_json:
+            card_name = screen_names_json[card_name]
+        play_draw_str = '\\cellcolor[HTML]{' + bg_color + '}\\small{' + sign_str + str(play_draw_counts[i]) + ' ' + \
+                        card_name + '}'
+        tex_file.write(play_draw_str + '\\\\\n')
+
+
 def _write_tex_matchup_lines(play_json, draw_json, screen_names_json, sign_str, bg_color, tex_file):
     # Ugly iteration hack!
     play_cards = list(play_json.keys())
@@ -95,29 +109,45 @@ def _write_tex_matchup(name, matchup_json, screen_names_json, in_bg_color, out_b
     tex_file.write('\\subsection*{' + name + '}\n')
     tex_file.write(matchup_json['notes'])
 
-    if 'play,draw' in matchup_json:
-        play_json = matchup_json['play,draw']
-        draw_json = matchup_json['play,draw']
+    if 'play_and_draw' in matchup_json:
+        play_json = matchup_json['play_and_draw']
+        # draw_json = matchup_json['play_and_draw']
+
+        tex_file.write('\\begin{center}\n')
+        tex_file.write('\\begin{tabular}{| l |}\n')
+        tex_file.write('\\hline\n')
+        tex_file.write('\\textit{Play and Draw}(' + str(sum(play_json['in'].values())) + ') \\\\\n')
+        tex_file.write('\\hline\n')
+
+        _write_tex_matchup_lines_pd(play_json['in'], screen_names_json, '+',
+                                    in_bg_color, tex_file)
+        _write_tex_matchup_lines_pd(play_json['out'], screen_names_json, '-',
+                                    out_bg_color, tex_file)
+
+        tex_file.write('\\hline\n')
+        tex_file.write('\\end{tabular}\n')
+        tex_file.write('\\end{center}\n')
+        tex_file.write('\\addcontentsline{toc}{section}{' + name + '}\n')
     else:
         play_json = matchup_json['play']
         draw_json = matchup_json['draw']
 
-    tex_file.write('\\begin{center}\n')
-    tex_file.write('\\begin{tabular}{| l | l |}\n')
-    tex_file.write('\\hline\n')
-    tex_file.write('\\textit{Play}(' + str(sum(play_json['in'].values())) + ') & \\textit{Draw}(' +
-                   str(sum(draw_json['in'].values())) + ') \\\\\n')
-    tex_file.write('\\hline\n')
+        tex_file.write('\\begin{center}\n')
+        tex_file.write('\\begin{tabular}{| l | l |}\n')
+        tex_file.write('\\hline\n')
+        tex_file.write('\\textit{Play}(' + str(sum(play_json['in'].values())) + ') & \\textit{Draw}(' +
+                       str(sum(draw_json['in'].values())) + ') \\\\\n')
+        tex_file.write('\\hline\n')
 
-    _write_tex_matchup_lines(play_json['in'], draw_json['in'], screen_names_json, '+',
-                             in_bg_color, tex_file)
-    _write_tex_matchup_lines(play_json['out'], draw_json['out'], screen_names_json, '-',
-                             out_bg_color, tex_file)
+        _write_tex_matchup_lines(play_json['in'], draw_json['in'], screen_names_json, '+',
+                                 in_bg_color, tex_file)
+        _write_tex_matchup_lines(play_json['out'], draw_json['out'], screen_names_json, '-',
+                                 out_bg_color, tex_file)
 
-    tex_file.write('\\hline\n')
-    tex_file.write('\\end{tabular}\n')
-    tex_file.write('\\end{center}\n')
-    tex_file.write('\\addcontentsline{toc}{section}{' + name + '}\n')
+        tex_file.write('\\hline\n')
+        tex_file.write('\\end{tabular}\n')
+        tex_file.write('\\end{center}\n')
+        tex_file.write('\\addcontentsline{toc}{section}{' + name + '}\n')
 
 
 def _write_tex_matchup_section(matchups_json, screen_names_json, in_bg_color, out_bg_color, tex_file):
@@ -145,6 +175,11 @@ def main():
     parser = argparse.ArgumentParser(description='Generate markdown')
     parser.add_argument('-sb', '--sbmap', help='Sideboard map JSON file', required=True)
     parser.add_argument('-tex', '--tex_file', help='Output tex file', required=True)
+    parser.add_argument('-pdf', '--pdf_directory', help='Output directory for pdf file', required=False,
+                        default='.')
+    # Note(thinks): In my case "C:/Users/tommy/AppData/Local/Programs/MiKTeX 2.9/miktex/bin/x64/pdflatex.exe"
+    parser.add_argument('-pdflatex', '--pdflatex_exe', help='Path to pdflatex exectuable (empty to disable pdf '
+                                                            'generation', required=False, default='')
     parser.add_argument('-sb_bg_color', '--sideboard_background_color',
                         help='Background color of sideboard cells in decklist', required=False, default='EEEEEE')
     parser.add_argument('-in_bg_color', '--in_background_color',
@@ -160,6 +195,13 @@ def main():
         verify_matchups(sb_map_json['decklist'], sb_map_json['matchups'])
         generate_tex(sb_map_json, args['sideboard_background_color'], args['in_background_color'],
                      args['out_background_color'], tex_file)
+
+    if args['pdflatex_exe']:
+        proc_args = [args['pdflatex_exe'], '-output-directory=' + args['pdf_directory'], args['tex_file']]
+
+        # Must run twice to get proper table of contents.
+        subprocess.run(proc_args)
+        subprocess.run(proc_args)
 
 
 if __name__ == "__main__":
