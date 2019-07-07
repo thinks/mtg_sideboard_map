@@ -80,6 +80,7 @@ Here is a brief description of the simple `.json` format use to pass the decklis
           ...
         }
       },
+      // Sideboarding on the draw.
       "draw": {
         "in": {
           "Serenity": 2,
