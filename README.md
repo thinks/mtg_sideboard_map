@@ -1,10 +1,10 @@
 # Magic the Gathering (MtG) Sideboard Map
-This repository contains a python script able to generate `.tex` and `.pdf` files from a decklist and its sideboard guide in `.json` format. The goals are to generate an easily printable document for players and to enable content creators to be able to deliver fine-tuned decklists rather than spending large amounts of time on formatting. A brief example demonstrating how it works is given below.
+This repository contains a python script able to generate `.tex` and `.pdf` files from a decklist and its sideboard guide in `.json` format. The goals are to generate an easily printable document for players and to enable content creators to be able to deliver fine-tuned decklists rather than spending large amounts of time on formatting. A brief example demonstrating how it works is given below, followed by a description of the input format.
 
 All code in this repository is released under the [MIT license](https://en.wikipedia.org/wiki/MIT_License).
 
 ## Example
-The snippet below shows how to clone the repository and the use the included python script to generate a sideboarding document in `.pdf` format for an example deck included in this repository.
+The snippet below shows how to clone the repository and the use the included python script to generate a sideboarding document in `.pdf` format for an example deck included in this repository. Ready-made results can be found in the [example folder](https://github.com/thinks/mtg_sideboard_map/tree/master/example).
 
 ```bash
 $ git clone https://github.com/thinks/mtg_sideboard_map.git
@@ -12,7 +12,7 @@ $ cd mtg_sideboard_map/python
 $ python generate_tex.py -sb ../example/example_sb_map.json -tex ../example/example.tex -pdflatex "C:/Users/tommy/AppData/Local/Programs/MiKTeX 2.9/miktex/bin/x64/pdflatex.exe" -pdf_dir ../example
 ```
 
-This will generate a file called `example.pdf` in the example folder. There are two ways to generate the `.pdf` file. The simplest is to install `pdflatex.exe` somewhere on your local machine and give the path to the script, as shown above. The script will then use that executable to generate a `.pdf` directly. If for some reason `pdflatex.exe` is not present (signalled by omitting the `-pdflatex` and `-pdf_dir` flags), the contents of the `.tex` file (`example.tex` in this case) can be pasted into an online LaTeX resource, such as [https://www.overleaf.com](https://www.overleaf.com), and the `.pdf` can be downloaded from there.
+This will generate a file called `example.pdf` in the example folder (preview [here](https://github.com/thinks/mtg_sideboard_map/blob/master/example/example.pdf)). There are two ways to generate the `.pdf` file. The simplest is to install `pdflatex.exe` somewhere on your local machine and give the path to the script, as shown above. The script will then use that executable to generate a `.pdf` directly. If for some reason `pdflatex.exe` is not present (signalled by omitting the `-pdflatex` and `-pdf_dir` flags), the contents of the `.tex` file (`example.tex` in this case, preview [here](https://github.com/thinks/mtg_sideboard_map/blob/master/example/example.tex)) can be pasted into an online LaTeX resource, such as [https://www.overleaf.com](https://www.overleaf.com), and the `.pdf` can be downloaded from there.
 
 ## Input
 Here is a brief description of the simple `.json` format use to pass the decklist and sideboard guide to the script. An example of a complete input file can be found [here](https://github.com/thinks/mtg_sideboard_map/blob/master/example/example_sb_map.json).
