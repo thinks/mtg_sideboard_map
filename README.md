@@ -15,7 +15,7 @@ $ python generate_tex.py -sb ../example/example_sb_map.json -tex ../example/exam
 This will generate a file called `example.pdf` in the example folder. There are two ways to generate the `.pdf` file. The simplest is to install `pdflatex.exe` somewhere on your local machine and give the path to the script, as shown above. The script will then use that executable to generate a `.pdf` directly. If for some reason `pdflatex.exe` is not present (signalled by omitting the `-pdflatex` and `-pdf_dir` flags), the contents of the `.tex` file (`example.tex` in this case) can be pasted into an online LaTeX resource, such as [https://www.overleaf.com](https://www.overleaf.com), and the `.pdf` can be downloaded from there.
 
 ## Input
-Here is a brief description of the simple `.json` format use to pass the decklist and sideboard guide to the script.
+Here is a brief description of the simple `.json` format use to pass the decklist and sideboard guide to the script. An example of a complete input file can be found [here](https://github.com/thinks/mtg_sideboard_map/blob/master/example/example_sb_map.json).
 
 ```cpp
 {
