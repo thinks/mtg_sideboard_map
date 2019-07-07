@@ -56,13 +56,12 @@ Here is a brief description of the simple `.json` format use to pass the decklis
         "in": {
           "Thoughtseize": 2,
           "Wear/Tear": 1,
-          "Lake of the Dead": 1,
-          "Grave Titan": 2
+          ...
         },
         // Cards to take out.
         "out": {
           "Chancellor of the Annex": 3,
-          "Cabal Therapy": 3
+          ...
         }
       }
     },
