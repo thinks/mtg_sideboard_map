@@ -1,0 +1,130 @@
+{
+  "title": "BR Reanimator",
+  "author": "Eric Landon",
+  "date": "May 3, 2019",
+  "decklist": {
+    "maindeck": {
+      "Entomb": 4,
+      "Faithless Looting": 4,
+      "Animate Dead": 4,
+      "Exhume": 4,
+      "Reanimate": 4,
+      "Unmask": 4,
+      "Cabal Therapy": 4,
+      "Griselbrand": 4,
+      "Chancellor of the Annex": 4,
+      "Tidespout Tyrant": 1,
+      "Ashen Rider": 1,
+      "Dark Ritual": 4,
+      "Lotus Petal": 4,
+      "Badlands": 2,
+      "Bayou": 1,
+      "Scrubland": 1,
+      "Swamp": 2,
+      "Bloodstained Mire": 4,
+      "Polluted Delta": 4
+    },
+    "sideboard": {
+      "Archetype of Endurance": 1,
+      "Elesh Norn, Grand Cenobite": 1,
+      "Iona, Shield of Emeria": 1,
+      "Thoughtseize": 2,
+      "Serenity": 2,
+      "Reverent Silence": 3,
+      "Coffin Purge": 1,
+      "Wear/Tear": 1,
+      "Lake of the Dead": 1,
+      "Grave Titan": 2
+    }
+  },
+  "screen_names": {
+    "Chancellor of the Annex": "Chancellor",
+    "Tidespout Tyrant": "Tidespout",
+    "Reverent Silence": "R. Silence",
+    "Archetype of Endurance": "Archetype",
+    "Elesh Norn, Grand Cenobite": "Elesh Norn",
+    "Iona, Shield of Emeria": "Iona",
+    "Lake of the Dead": "Lake",
+    "Cabal Therapy": "Therapy"
+  },
+  "matchups": {
+    "Unknown": {
+      "notes": "Important things to remember in the matchup. Sideboarding is the same regardless if we are on the play/draw.",
+      "play_and_draw": {
+        "in": {
+          "Thoughtseize": 2,
+          "Wear/Tear": 1,
+          "Lake of the Dead": 1,
+          "Grave Titan": 2
+        },
+        "out": {
+          "Chancellor of the Annex": 3,
+          "Cabal Therapy": 3
+        }
+      }
+    },
+    "Eldrazi": {
+      "notes": "Here sideboarding is different depending on if we are on the play or on the draw.",
+      "play": {
+        "in": {
+          "Reverent Silence": 3,
+          "Serenity": 2,
+          "Wear/Tear": 1,
+          "Lake of the Dead": 1,
+          "Grave Titan": 2
+        },
+        "out": {
+          "Chancellor of the Annex": 3,
+          "Cabal Therapy": 4,
+          "Ashen Rider": 1,
+          "Exhume": 1
+        }
+      },
+      "draw": {
+        "in": {
+          "Reverent Silence": 3,
+          "Serenity": 2,
+          "Wear/Tear": 1,
+          "Lake of the Dead": 1,
+          "Grave Titan": 2
+        },
+        "out": {
+          "Chancellor of the Annex": 1,
+          "Cabal Therapy": 4,
+          "Dark Ritual": 3,
+          "Exhume": 1
+        }
+      }
+    },
+    "UW Miracles": {
+      "notes": "",
+      "play": {
+        "in": {
+          "Thoughtseize": 2,
+          "Iona, Shield of Emeria": 1,
+          "Archetype of Endurance": 1
+        },
+        "out": {
+          "Cabal Therapy": 2,
+          "Ashen Rider": 1,
+          "Tidespout Tyrant": 1
+        }
+      },
+      "draw": {
+        "in": {
+          "Thoughtseize": 2,
+          "Iona, Shield of Emeria": 1,
+          "Archetype of Endurance": 1,
+          "Grave Titan": 2,
+          "Lake of the Dead": 1
+        },
+        "out": {
+          "Chancellor of the Annex": 4,
+          "Cabal Therapy": 1,
+          "Ashen Rider": 1,
+          "Tidespout Tyrant": 1
+        }
+      }
+    }
+  }
+}
