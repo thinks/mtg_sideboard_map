@@ -10,6 +10,26 @@ import subprocess
 from verify import verify_decklist, verify_matchups
 
 
+def _get_card_screen_name(card_name, screen_names_json):
+    if card_name in screen_names_json:
+        return screen_names_json[card_name]
+    return card_name
+
+
+def _get_play_and_draw_json(matchup_json):
+    if 'play_and_draw' in matchup_json:
+        assert 'play' not in matchup_json
+        assert 'draw' not in matchup_json
+        return matchup_json['play_and_draw'], None, True
+    else:
+        assert 'play_and_draw' not in matchup_json
+        return matchup_json['play'], matchup_json['draw'], False
+
+
+def _table_cell_string(card_name, count, sign_str, bg_color):
+    return '\\cellcolor[HTML]{' + bg_color + '}\\small{' + sign_str + str(count) + ' ' + card_name + '}'
+
+
 def _write_tex_begin(title_str, author_str, date_str, tex_file):
     tex_file.write('\\documentclass{article}\n')
     tex_file.write('\\usepackage[utf8]{inputenc}\n')
@@ -54,11 +74,11 @@ def _write_tex_decklist_section(decklist_json, sb_bg_color, tex_file):
     for i in range(max(len(md_json), len(sb_json))):
         md_str = ''
         if i < len(md_cards):
-            md_str = '\\cellcolor[HTML]{FFFFFF}\\small{' + str(md_counts[i]) + ' ' + md_cards[i] + '}'
+            md_str = _table_cell_string(md_cards[i], md_counts[i], '', 'FFFFFF')
 
         sb_str = ''
         if i < len(sb_cards):
-            sb_str = '\\cellcolor[HTML]{' + sb_bg_color + '}\\small{' + str(sb_counts[i]) + ' ' + sb_cards[i] + '}'
+            sb_str = _table_cell_string(sb_cards[i], sb_counts[i], '', sb_bg_color)
 
         tex_file.write(md_str + ' & ' + sb_str + '\\\\\n')
 
@@ -72,11 +92,8 @@ def _write_tex_matchup_lines_pd(play_draw_json, screen_names_json, sign_str, bg_
     play_draw_cards = list(play_draw_json.keys())
     play_draw_counts = list(play_draw_json.values())
     for i in range(len(play_draw_json)):
-        card_name = play_draw_cards[i]
-        if card_name in screen_names_json:
-            card_name = screen_names_json[card_name]
-        play_draw_str = '\\cellcolor[HTML]{' + bg_color + '}\\small{' + sign_str + str(play_draw_counts[i]) + ' ' + \
-                        card_name + '}'
+        play_draw_str = _table_cell_string(_get_card_screen_name(play_draw_cards[i], screen_names_json),
+                                           play_draw_counts[i], sign_str, bg_color)
         tex_file.write(play_draw_str + '\\\\\n')
 
 
@@ -90,30 +107,26 @@ def _write_tex_matchup_lines(play_json, draw_json, screen_names_json, sign_str, 
     for i in range(max(len(play_json), len(draw_json))):
         play_str = ''
         if i < len(play_cards):
-            card_name = play_cards[i]
-            if card_name in screen_names_json:
-                card_name = screen_names_json[card_name]
-            play_str = '\\cellcolor[HTML]{' + bg_color + '}\\small{' + sign_str + str(play_counts[i]) + ' ' + \
-                       card_name + '}'
+            play_str = _table_cell_string(_get_card_screen_name(play_cards[i], screen_names_json), play_counts[i],
+                                          sign_str, bg_color)
+
         draw_str = ''
         if i < len(draw_cards):
-            card_name = draw_cards[i]
-            if card_name in screen_names_json:
-                card_name = screen_names_json[card_name]
-            draw_str = '\\cellcolor[HTML]{' + bg_color + '}\\small{' + sign_str + str(draw_counts[i]) + ' ' + \
-                       card_name + '}'
+            draw_str = _table_cell_string(_get_card_screen_name(draw_cards[i], screen_names_json), draw_counts[i],
+                                          sign_str, bg_color)
         tex_file.write(play_str + ' & ' + draw_str + '\\\\\n')
 
 
 def _write_tex_matchup(name, matchup_json, screen_names_json, in_bg_color, out_bg_color, tex_file):
     tex_file.write('\\subsection*{' + name + '}\n')
     tex_file.write(matchup_json['notes'])
+    tex_file.write('\\begin{center}\n')
 
-    if 'play_and_draw' in matchup_json:
+    play_json, draw_json, play_and_draw = _get_play_and_draw_json(matchup_json)
+    if play_and_draw:
         play_json = matchup_json['play_and_draw']
         # draw_json = matchup_json['play_and_draw']
 
-        tex_file.write('\\begin{center}\n')
         tex_file.write('\\begin{tabular}{| l |}\n')
         tex_file.write('\\hline\n')
         tex_file.write('\\textit{Play and Draw}(' + str(sum(play_json['in'].values())) + ') \\\\\n')
@@ -123,16 +136,7 @@ def _write_tex_matchup(name, matchup_json, screen_names_json, in_bg_color, out_b
                                     in_bg_color, tex_file)
         _write_tex_matchup_lines_pd(play_json['out'], screen_names_json, '-',
                                     out_bg_color, tex_file)
-
-        tex_file.write('\\hline\n')
-        tex_file.write('\\end{tabular}\n')
-        tex_file.write('\\end{center}\n')
-        tex_file.write('\\addcontentsline{toc}{section}{' + name + '}\n')
     else:
-        play_json = matchup_json['play']
-        draw_json = matchup_json['draw']
-
-        tex_file.write('\\begin{center}\n')
         tex_file.write('\\begin{tabular}{| l | l |}\n')
         tex_file.write('\\hline\n')
         tex_file.write('\\textit{Play}(' + str(sum(play_json['in'].values())) + ') & \\textit{Draw}(' +
@@ -144,10 +148,10 @@ def _write_tex_matchup(name, matchup_json, screen_names_json, in_bg_color, out_b
         _write_tex_matchup_lines(play_json['out'], draw_json['out'], screen_names_json, '-',
                                  out_bg_color, tex_file)
 
-        tex_file.write('\\hline\n')
-        tex_file.write('\\end{tabular}\n')
-        tex_file.write('\\end{center}\n')
-        tex_file.write('\\addcontentsline{toc}{section}{' + name + '}\n')
+    tex_file.write('\\hline\n')
+    tex_file.write('\\end{tabular}\n')
+    tex_file.write('\\end{center}\n')
+    tex_file.write('\\addcontentsline{toc}{section}{' + name + '}\n')
 
 
 def _write_tex_matchup_section(matchups_json, screen_names_json, in_bg_color, out_bg_color, tex_file):
@@ -171,11 +175,20 @@ def generate_tex(sb_map_json, sb_bg_color, in_bg_color, out_bg_color, tex_file):
     _write_tex_end(tex_file)
 
 
+def generate_pdf(pdflatex_exe_str, pdf_dir_str, tex_file_str):
+    if pdflatex_exe_str:
+        proc_args = [pdflatex_exe_str, '-output-directory=' + pdf_dir_str, tex_file_str]
+
+        # Must run twice to get proper table of contents.
+        subprocess.run(proc_args)
+        subprocess.run(proc_args)
+
+
 def main():
     parser = argparse.ArgumentParser(description='Generate markdown')
     parser.add_argument('-sb', '--sbmap', help='Sideboard map JSON file', required=True)
     parser.add_argument('-tex', '--tex_file', help='Output tex file', required=True)
-    parser.add_argument('-pdf', '--pdf_directory', help='Output directory for pdf file', required=False,
+    parser.add_argument('-pdf_dir', '--pdf_directory', help='Output directory for pdf file', required=False,
                         default='.')
     # Note(thinks): In my case "C:/Users/tommy/AppData/Local/Programs/MiKTeX 2.9/miktex/bin/x64/pdflatex.exe"
     parser.add_argument('-pdflatex', '--pdflatex_exe', help='Path to pdflatex exectuable (empty to disable pdf '
@@ -196,12 +209,7 @@ def main():
         generate_tex(sb_map_json, args['sideboard_background_color'], args['in_background_color'],
                      args['out_background_color'], tex_file)
 
-    if args['pdflatex_exe']:
-        proc_args = [args['pdflatex_exe'], '-output-directory=' + args['pdf_directory'], args['tex_file']]
-
-        # Must run twice to get proper table of contents.
-        subprocess.run(proc_args)
-        subprocess.run(proc_args)
+    generate_pdf(args['pdflatex_exe'], args['pdf_directory'], args['tex_file'])
 
 
 if __name__ == "__main__":
