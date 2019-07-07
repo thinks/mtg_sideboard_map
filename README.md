@@ -17,7 +17,7 @@ This will generate a file called `example.pdf` in the example folder. There are 
 ## Input
 Here is a brief description of the simple `.json` format use to pass the decklist and sideboard guide to the script.
 
-```json
+```cpp
 {
   "title": "My Cool Deckname",
   "author": "Tommy Hinks",
