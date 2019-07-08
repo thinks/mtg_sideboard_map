@@ -1,18 +1,24 @@
 # Magic the Gathering (MtG) Sideboard Map
-This repository contains a python script able to generate `.tex` and `.pdf` files from a decklist and its sideboard guide in `.json` format. The goals are to generate an easily printable document for players and to enable content creators to be able to deliver fine-tuned decklists rather than spending large amounts of time on formatting. A brief example demonstrating how it works is given below, followed by a description of the input format.
+This repository contains a [python script](https://github.com/thinks/mtg_sideboard_map/blob/master/python/generate_tex.py) for generating `.tex` and `.pdf` files from a decklist and its sideboard guide provided in `.json` format. The goals are to generate an easily printable document for players and to enable content creators to be able to deliver fine-tuned decklists rather than spending large amounts of time on formatting. A brief example demonstrating how it works is given below, followed by a description of the input format.
 
 All code in this repository is released under the [MIT license](https://en.wikipedia.org/wiki/MIT_License).
 
 ## Example
-The snippet below shows how to clone the repository and the use the included python script to generate a sideboarding document in `.pdf` format for an [example deck](https://github.com/thinks/mtg_sideboard_map/blob/master/example/example_sb_map.json) included in this repository. Ready-made results can be found in the [example folder](https://github.com/thinks/mtg_sideboard_map/tree/master/example).
+The script uses `.tex` as an intermediary representation before finalizing the results to `.pdf`. The snippet below shows how to generate a `.tex` file for an [example deck](https://github.com/thinks/mtg_sideboard_map/blob/master/example/example_sb_map.json) using the script. Ready-made results can be found in the [example folder](https://github.com/thinks/mtg_sideboard_map/tree/master/example).
+```bash
+$ git clone https://github.com/thinks/mtg_sideboard_map.git
+$ cd mtg_sideboard_map/python
+$ python generate_tex.py -sb ../example/example_sb_map.json -tex ../example/example.tex
+```
+Using a third-party application, such as `pdflatex.exe`, the file `example.tex` (preview [here](https://github.com/thinks/mtg_sideboard_map/blob/master/example/example.tex)) can be converted to a `.pdf` file. Having access to this intermediary format allows users to fine-tune the `.tex` file before the final step of creating the `.pdf` file. Also, in some cases it might be easier to use an online resource, such as [https://www.overleaf.com](https://www.overleaf.com), rather than installing `pdflatex.exe` on the local machine. 
 
+However, in the case where `pdflatex.exe` is available on the local machine the script can be instructed to use it to directly generate a `.pdf` file, as shown below.
 ```bash
 $ git clone https://github.com/thinks/mtg_sideboard_map.git
 $ cd mtg_sideboard_map/python
 $ python generate_tex.py -sb ../example/example_sb_map.json -tex ../example/example.tex -pdflatex "C:/Users/tommy/AppData/Local/Programs/MiKTeX 2.9/miktex/bin/x64/pdflatex.exe" -pdf_dir ../example
 ```
-
-This will generate a file called `example.pdf` in the example folder (preview [here](https://github.com/thinks/mtg_sideboard_map/blob/master/example/example.pdf)). There are two ways to generate the `.pdf` file. The simplest is to install `pdflatex.exe` somewhere on your local machine and give the path to the script, as shown above. The script will then use that executable to generate a `.pdf` directly. If for some reason `pdflatex.exe` is not present (signalled by omitting the `-pdflatex` and `-pdf_dir` flags), the contents of the `.tex` file (`example.tex` in this case, preview [here](https://github.com/thinks/mtg_sideboard_map/blob/master/example/example.tex)) can be pasted into an online LaTeX resource, such as [https://www.overleaf.com](https://www.overleaf.com), and the `.pdf` can be downloaded from there.
+This will generate a file called `example.pdf` (preview [here](https://github.com/thinks/mtg_sideboard_map/blob/master/example/example.pdf)) in the example folder. 
 
 ## Input
 Here is a brief description of the simple `.json` format use to pass the decklist and sideboard guide to the script. Note that the comments have been added for clarity here and should be omitted when creating an actual `.json` file. An example of a complete input file can be found [here](https://github.com/thinks/mtg_sideboard_map/blob/master/example/example_sb_map.json).
