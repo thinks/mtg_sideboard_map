@@ -45,7 +45,7 @@ Here is a brief description of the simple `.json` format use to pass the decklis
       ...
     }
   },
-  // Optional shorter names for cards more suitable for two-column formatting.
+  // Optional shorter names for cards (more suitable for two-column formatting).
   "screen_names": {
     "Archetype of Endurance": "Archetype",
     "Elesh Norn, Grand Cenobite": "Elesh Norn",
